@@ -18,21 +18,30 @@ const Home = () => {
   const scrollToSection = (sectionRef) => {
     if (!sectionRef?.current) return;
 
+    const target = sectionRef.current;
+
+    // If we have a viewport and it is actually scrollable and contains the target, use it
     if (viewportRef?.current) {
       const viewport = viewportRef.current;
-      const target = sectionRef.current;
 
-      const targetTop = target.getBoundingClientRect().top;
-      const viewportTop = viewport.getBoundingClientRect().top;
+      const isScrollable = viewport.scrollHeight > viewport.clientHeight;
+      const containsTarget = viewport.contains(target);
 
-      const scrollTop = viewport.scrollTop + (targetTop - viewportTop);
+      if (isScrollable && containsTarget) {
+        const targetRect = target.getBoundingClientRect();
+        const viewportRect = viewport.getBoundingClientRect();
 
-      viewport.scrollTo({ top: scrollTop, behavior: 'smooth' });
-      return;
+        const scrollTop = viewport.scrollTop + (targetRect.top - viewportRect.top);
+
+        viewport.scrollTo({ top: scrollTop, behavior: 'smooth' });
+        return;
+      }
     }
 
-    sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Fallback — use normal page scrolling (works on mobile)
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
 
   return (
     <main className="w-full min-h-screen h-full p-3 lg:p-6 flex justify-center items-start bg-[#0A0A0C] text-white">
@@ -47,7 +56,7 @@ const Home = () => {
               <div className="absolute inset-0 rounded-full bg-[#00A3FF] opacity-20 blur-md"></div>
               <img
                 className="w-32 h-32 rounded-full border-2 border-[#00A3FF] shadow-lg object-cover relative z-10"
-                src="/be5030e5-7f6a-40ed-9eb4-d3ec33de60d7.jfif"
+                src="/be5030e5-7f6a-40ed-9eb4-d3ec33de60d7.jpg"
                 alt="Nilesh Kashani"
               />
             </div>

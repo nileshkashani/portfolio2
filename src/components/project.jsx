@@ -46,14 +46,14 @@ const Project = () => {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2 bg-[#00A3FF] text-white font-semibold rounded-full hover:bg-[#3DB4FF] transition text-sm"
+                  className="px-5 py-2 bg-[#00A3FF] text-white font-semibold rounded-md hover:bg-[#3DB4FF] transition text-sm"
                 >
                   Source Code
                 </a>
 
                 <div
                   onClick={() => navigate("/details", { state: { project } })}
-                  className="px-5 py-2 bg-[#00A3FF] text-white font-semibold rounded-full hover:bg-gray-200 transition text-sm cursor-pointer"
+                  className="px-5 py-2 bg-[#00A3FF] text-white font-semibold rounded-md hover:bg-gray-200 transition text-sm cursor-pointer"
                 >
                   See Details
                 </div>
