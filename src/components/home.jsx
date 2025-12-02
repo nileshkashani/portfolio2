@@ -136,10 +136,10 @@ const Home = () => {
 
           {/* Desktop Nav */}
           <div className="hidden h-16 px-6 lg:px-12 md:flex items-center justify-start space-x-6 border border-[#2A2A3A] rounded-xl bg-[#13131A] shadow-lg">
-            <button onClick={() => scrollToSection(aboutRef)} className="hover:text-[#00A3FF] transition-colors px-4 py-2">About</button>
-            <button onClick={() => scrollToSection(skillsRef)} className="hover:text-[#00A3FF] transition-colors px-4 py-2">Skills</button>
-            <button onClick={() => scrollToSection(projectRef)} className="hover:text-[#00A3FF] transition-colors px-4 py-2">Projects</button>
-            <button onClick={() => scrollToSection(contactRef)} className="hover:text-[#00A3FF] transition-colors px-4 py-2">Contact</button>
+            <button onClick={() => scrollToSection(aboutRef)} className="cursor-pointer hover:text-[#00A3FF] transition-colors px-4 py-2">About</button>
+            <button onClick={() => scrollToSection(skillsRef)} className="cursor-pointer hover:text-[#00A3FF] transition-colors px-4 py-2">Skills</button>
+            <button onClick={() => scrollToSection(projectRef)} className="cursor-pointer hover:text-[#00A3FF] transition-colors px-4 py-2">Projects</button>
+            <button onClick={() => scrollToSection(contactRef)} className="cursor-pointer hover:text-[#00A3FF] transition-colors px-4 py-2">Contact</button>
           </div>
 
           {/* Mobile Nav */}
