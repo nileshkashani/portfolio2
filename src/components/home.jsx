@@ -40,14 +40,14 @@ const Home = () => {
 
         {/* LEFT CARD */}
         <div className="w-full md:w-[330px] lg:w-[420px] xl:w-[500px] flex flex-col space-y-5 h-full border border-[#2A2A3A] rounded-xl bg-[#13131A] p-6 shadow-lg">
-          
+
           {/* Profile */}
           <div className="flex flex-col items-center md:items-start">
             <div className="relative mb-4">
               <div className="absolute inset-0 rounded-full bg-[#00A3FF] opacity-20 blur-md"></div>
               <img
                 className="w-32 h-32 rounded-full border-2 border-[#00A3FF] shadow-lg object-cover relative z-10"
-                src="/default-profile.jpg"
+                src="/be5030e5-7f6a-40ed-9eb4-d3ec33de60d7.jfif"
                 alt="Nilesh Kashani"
               />
             </div>
@@ -87,11 +87,43 @@ const Home = () => {
             </a>
           </div>
 
+          {/* Mobile Social Links */}
+          <div className="flex w-full md:hidden gap-6 p-4 mt-4 justify-center border-t border-[#2A2A3A]">
+            <a
+              href="https://github.com/nileshkashani"
+              target="_blank"
+              rel="noreferrer"
+              className="text-gray-200 hover:text-white transition-colors"
+            >
+              <FaGithub className="text-2xl" />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/nilesh-kashani"
+              target="_blank"
+              rel="noreferrer"
+              className="text-gray-200 hover:text-[#00A3FF] transition-colors"
+            >
+              <FaLinkedin className="text-2xl" />
+            </a>
+
+            <a
+              href="https://www.leetcode.com/nilesh_____45"
+              target="_blank"
+              rel="noreferrer"
+              className="text-gray-200 hover:text-white transition-colors"
+            >
+              <SiLeetcode className="text-2xl" />
+            </a>
+          </div>
+
+
           {/* Resume Button — ONLY THING UPDATED */}
           <div className="border-t border-[#2A2A3A] flex justify-center items-center">
             <a
               className="bg-[#1d1d27] p-2 rounded-md mt-3 cursor-pointer transition-colors hover:bg-[#262633]"
               href="/NileshKashani - Full Stack Web Developer1.pdf"
+              target='_blank'
             >
               Download Resume
             </a>

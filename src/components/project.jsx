@@ -20,7 +20,7 @@ const Project = () => {
   ];
 
   return (
-    <section id="projects" className="w-full min-h-screen p-6 bg-[#0A0A0C] text-white">
+    <section id="projects" className="w-full md:min-h-screen p-6 bg-[#0A0A0C] text-white">
       <div className="w-full max-w-7xl mx-auto flex flex-col items-center space-y-12">
         <h2 className="text-3xl lg:text-4xl font-semibold border-b-2 border-[#00A3FF] pb-2">
           Projects
