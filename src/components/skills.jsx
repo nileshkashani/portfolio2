@@ -14,7 +14,7 @@ const Skills = () => {
         <div className="w-full bg-[#13131A] border border-[#2A2A3A] rounded-xl p-6 shadow-lg text-center">
           <h3 className="text-xl lg:text-2xl font-bold text-white mb-6">Programming Languages</h3>
           <div className="flex flex-wrap justify-center gap-6 mb-8">
-            <SkillCard icon={<FaJava />} label="Java" />
+            <SkillCard icon={<FaJava/>} label="Java" />
             <SkillCard icon={<SiCplusplus />} label="C/C++" />
             <SkillCard icon={<FaJs />} label="JavaScript" />
             <SkillCard icon={<FaHtml5 />} label="HTML" />
@@ -52,7 +52,7 @@ const Skills = () => {
 
 const SkillCard = ({ icon, label }) => {
   return (
-    <div className="w-36 h-28 sm:w-40 sm:h-28 md:w-48 md:h-28 lg:w-56 lg:h-32 bg-[#1d1d27] border border-[#23232A] rounded-xl shadow-md flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer">
+    <div className="w-24 h-20 sm:w-40 sm:h-28 md:w-48 md:h-28 lg:w-56 lg:h-32 bg-[#1d1d27] border border-[#23232A] rounded-xl shadow-md flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer">
       <div className="text-3xl md:text-4xl mb-2">{icon}</div>
       <p className="text-white font-medium text-sm text-center">{label}</p>
     </div>
