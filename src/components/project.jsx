@@ -41,12 +41,12 @@ const Project = () => {
                 </p>
               </div>
 
-              <div className="flex gap-3 mt-auto pt-4 flex-wrap">
+              <div className="flex gap-3 mt-auto pt-4">
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2 bg-[#00A3FF] text-white font-semibold rounded-md hover:bg-[#3DB4FF] transition text-sm"
+                  className="px-3 py-2 bg-[#00A3FF] text-white font-semibold rounded-md hover:bg-[#3DB4FF] transition text-sm"
                 >
                   Source Code
                 </a>

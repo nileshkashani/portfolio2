@@ -27,12 +27,12 @@ const About = () => {
           </h2>
 
           <div className="w-full mt-8 flex flex-cols items-center">
-            <div className="bg-[#13131A] border border-[#2A2A3A] rounded-2xl p-6 flex flex-col justify-center space-y-3 hover:shadow-lg transition-shadow w-full">
-              <div className="flex items-center gap-4">
+            <div className="bg-[#13131A] border border-[#2A2A3A] rounded-2xl p-6 flex flex-col justify-center space-y-3 hover:shadow-lg transition-shadow w-full gap-1">
+              <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full flex items-center justify-center bg-[#00A3FF] bg-opacity-10 border border-[#00A3FF]">
                   <FaSchool className="w-6 h-6" />
                 </div>
-                <h3 className="text-white text-xl font-semibold">Indira College of Commerce and Science, Pune</h3>
+                <h3 className="text-white text-l font-semibold">Indira College of Commerce and Science, Pune</h3>
               </div>
               <div className="flex gap-5 justify-between">
                 <span className="text-gray-300">Bachelor of Science in Computer Science</span>
