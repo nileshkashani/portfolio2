@@ -8,11 +8,11 @@ const Project = () => {
     {
       title: "AI Fitness App",
       summary:
-        "AI Fitness App: A modern microservice-based platform built using Spring Boot. Users upload fitness stats and Gemini AI provides personalized suggestions, improvements, and safety measures for workouts. Features Spring Cloud Eureka, Kafka async communication, JPA + MongoDB, Keycloak authentication, and a React (Vite + Tailwind) frontend.",
+        "AI Fitness App - A modern microservice-based platform built using Spring Boot. Users upload fitness stats and Gemini AI provides personalized suggestions, improvements, and safety measures for workouts. Features Spring Cloud Eureka, Kafka async communication, JPA + MongoDB, Keycloak authentication, and a React (Vite + Tailwind) frontend.",
       github: "https://github.com/nileshkashani/AI-Fitness-App",
     },
     {
-      title: "Club Matrix",
+      title: "School Club Management app",
       summary:
         "Club Matrix - empowering school clubs using Java (Spring Boot) + React + MySQL. Hackathon Runner-up project with features like sending club join requests, exploring clubs, and adding your own club.",
       github: "https://github.com/nileshkashani/clubmatrix",
