@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const Details = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { project } = location.state || {};
-
+  useEffect(() => {
+    console.log(project)
+  }, [])
   if (!project) {
     return (
       <div className="w-full min-h-screen flex items-center justify-center bg-[#0A0A0C] text-white p-6">
@@ -23,8 +25,8 @@ const Details = () => {
   }
 
   const projectImages = {
-    'Club Matrix': ['sc-45.png', 'sc-44.png', 'sc-46.png', 'sc-47.png', 'sc-48.png', 'sc-49.png', 'sc-50.png', 'sc-51.png'],
-    'AI Fitness App': ['ai-1.png', 'ai-2.png', 'ai-3.png', 'ai-4.png']
+    'School Club Management app': ['sc-45.png', 'sc-44.png', 'sc-46.png', 'sc-47.png', 'sc-48.png', 'sc-49.png', 'sc-50.png', 'sc-51.png'],
+    'AI Fitness App': ['link1.3.png', 'link0.1.png', 'link1.1.png', 'link1.2.png', 'link1.4.png']
   };
 
   const images = projectImages[project.title] || [];
@@ -124,14 +126,6 @@ const Details = () => {
             </div>
           </div>
         )}
-
-        {/* Details Box */}
-        <div className="bg-[#13131A] border border-[#2A2A3A] rounded-xl p-6 shadow-lg">
-          <h3 className="text-xl font-semibold text-[#00A3FF] mb-3">Project Details</h3>
-          <p className="text-gray-300">
-            {project.details || 'No additional details provided.'}
-          </p>
-        </div>
 
         {/* Footer Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-end">

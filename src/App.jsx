@@ -22,6 +22,9 @@ function App() {
             <Route path='/details' element={<Details/>}></Route>
         </Routes>
       </BrowserRouter>
+      <footer>
+         <p className='bg-[#13131a] text-white text-center' >Copyright &copy; Nilesh Kashani - 2025</p>
+      </footer>
     </>
   )
 }
