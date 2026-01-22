@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Snowfall from 'react-snowfall'
 import Home from './components/home'
 import About from './components/about'
 import Skills from './components/skills'
@@ -12,7 +13,9 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
+      <Snowfall style={{ zIndex: 9999, position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', pointerEvents: 'none' }} />
+      {/* Main content follows */}
+      <BrowserRouter>   
         <Routes>
             <Route path='/' element={<Home/>}></Route>
             <Route path='/about' element={<About/>}></Route>
