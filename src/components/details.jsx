@@ -1,23 +1,28 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, ArrowLeft, Github, ExternalLink } from 'lucide-react';
 
 const Details = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { project } = location.state || {};
+
   useEffect(() => {
-    console.log(project)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
+
   if (!project) {
     return (
-      <div className="w-full min-h-screen flex items-center justify-center bg-[#0A0A0C] text-white p-6">
-        <div className="max-w-lg w-full bg-[#13131A] border border-[#2A2A3A] rounded-xl p-8 text-center">
-          <p className="text-gray-300">No details found. Please go back and try again.</p>
+      <div className="w-full min-h-screen flex items-center justify-center bg-background text-white p-6">
+        <div className="max-w-md w-full glass-card rounded-2xl p-10 text-center flex flex-col items-center gap-6">
+          <p className="text-secondary">Project details not found.</p>
           <button
             onClick={() => navigate('/')}
-            className="mt-6 px-4 py-2 bg-[#00A3FF] text-white rounded-full font-semibold hover:bg-[#3DB4FF] transition"
+            className="px-6 py-2.5 bg-white text-surface-base rounded-full font-semibold hover:bg-white/90 transition-all flex items-center gap-2"
           >
-            Go Back
+            <ArrowLeft className="w-4 h-4" />
+            Return Home
           </button>
         </div>
       </div>
@@ -25,129 +30,177 @@ const Details = () => {
   }
 
   const projectImages = {
-    'School Club Management app': ['sc-45.png', 'sc-44.png', 'sc-46.png', 'sc-47.png', 'sc-48.png', 'sc-49.png', 'sc-50.png', 'sc-51.png'],
+    'School Club Management App': ['sc-45.png', 'sc-44.png', 'sc-46.png', 'sc-47.png', 'sc-48.png', 'sc-49.png', 'sc-50.png', 'sc-51.png'],
     'AI Fitness App': ['link1.3.png', 'link0.1.png', 'link1.1.png', 'link1.2.png', 'link1.4.png']
   };
 
   const images = projectImages[project.title] || [];
   const [index, setIndex] = useState(0);
-  const [zoomed, setZoomed] = useState(false);
+  const [direction, setDirection] = useState(0);
 
-  const nextImage = () => setIndex((prev) => (images.length ? (prev + 1) % images.length : 0));
-  const prevImage = () => setIndex((prev) => (images.length ? (prev - 1 + images.length) % images.length : 0));
+  const nextImage = () => {
+    setDirection(1);
+    setIndex((prev) => (images.length ? (prev + 1) % images.length : 0));
+  };
+  
+  const prevImage = () => {
+    setDirection(-1);
+    setIndex((prev) => (images.length ? (prev - 1 + images.length) % images.length : 0));
+  };
+
+  const variants = {
+    enter: (dir) => ({
+      x: dir > 0 ? 300 : -300,
+      opacity: 0,
+      scale: 0.95
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      scale: 1
+    },
+    exit: (dir) => ({
+      zIndex: 0,
+      x: dir < 0 ? 300 : -300,
+      opacity: 0,
+      scale: 0.95
+    })
+  };
 
   return (
-    <div className="w-full min-h-screen p-6 lg:p-10 bg-[#0A0A0C] text-white flex items-center justify-center">
-      <div className="w-full max-w-6xl flex flex-col space-y-8">
-
-        {/* HEADER */}
-        <div className="flex items-start justify-between">
-          <div>
-            {/* Title with underline directly under the text only */}
-            <h2 className="inline-block text-3xl sm:text-4xl font-bold text-white border-b-2 border-[#00A3FF] pb-1">
-              {project.title}
-            </h2>
-
-            <p className="text-gray-300 mt-2 max-w-3xl">{project.summary}</p>
-          </div>
-
-          <div className="hidden sm:flex gap-3">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      className="w-full min-h-screen p-4 md:p-8 lg:p-12 bg-background text-white flex justify-center pb-24"
+    >
+      <div className="w-full max-w-6xl flex flex-col gap-10">
+        
+        {/* Navigation & Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="flex flex-col gap-6 items-start">
             <button
               onClick={() => navigate(-1)}
-              className="px-4 py-2 bg-[#13131A] border border-[#2A2A3A] rounded-full hover:bg-[#17171b] transition text-white"
+              className="flex items-center gap-2 text-sm font-medium text-secondary hover:text-white transition-colors group px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10"
             >
-              Back
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              Back to Projects
             </button>
+            
+            <div className="flex flex-col gap-3">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-2">
+                {project.title}
+              </h1>
+              <p className="text-secondary max-w-3xl text-lg leading-relaxed">
+                {project.summary}
+              </p>
+              {project.tags && (
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {project.tags.map(tag => (
+                    <span key={tag} className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-secondary">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="flex shrink-0">
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 bg-[#00A3FF] text-white font-semibold rounded-full hover:bg-[#3DB4FF] transition"
+              className="flex items-center gap-2 px-5 py-2.5 bg-white text-surface-base font-semibold rounded-full hover:bg-white/90 hover:scale-105 transition-all shadow-lg"
             >
-              View Source
+              <Github className="w-5 h-5" />
+              Source Code
             </a>
           </div>
         </div>
 
-        {/* CAROUSEL */}
+        {/* Carousel */}
         {images.length > 0 ? (
-          <div className="bg-[#13131A] border border-[#2A2A3A] rounded-xl p-6 shadow-lg">
-            <div className="relative w-full flex items-center justify-center">
-
+          <div className="glass-card rounded-[32px] p-4 md:p-8 flex flex-col items-center">
+            <div className="relative w-full aspect-video md:aspect-[21/9] flex items-center justify-center overflow-hidden rounded-[20px] bg-surface-base border border-white/5">
+              
               {/* Prev Button */}
-              <button
-                onClick={prevImage}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-[#0F1720] border border-[#23232A]
-                text-white rounded-full p-2 hover:scale-105 transition z-20"
-              >
-                ◀
-              </button>
+              {images.length > 1 && (
+                <button
+                  onClick={prevImage}
+                  className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-surface-base/80 backdrop-blur-md border border-white/10 text-white rounded-full hover:scale-110 hover:bg-white/10 transition z-20"
+                >
+                  <ChevronLeft className="w-6 h-6 ml-[-2px]" />
+                </button>
+              )}
 
-              {/* Image */}
-              <div
-                onClick={() => setZoomed((z) => !z)}
-                className={`mx-auto transition-transform duration-500 ${zoomed ? 'scale-150' : 'scale-100'} cursor-zoom-in`}
-                style={{ maxWidth: '100%', overflow: 'hidden' }}
-              >
-                <img
-                  src={images[index]}
-                  alt={`${project.title} screenshot ${index + 1}`}
-                  className="rounded-2xl shadow-lg w-[90vw] sm:w-[80vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw]
-                  h-auto object-contain transition-all duration-500"
-                />
+              {/* Image Frame */}
+              <div className="relative w-full h-full flex items-center justify-center p-4">
+                <AnimatePresence initial={false} custom={direction}>
+                  <motion.img
+                    key={index}
+                    src={`/${images[index]}`}
+                    alt={`${project.title} screenshot ${index + 1}`}
+                    custom={direction}
+                    variants={variants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      x: { type: "spring", stiffness: 300, damping: 30 },
+                      opacity: { duration: 0.3 }
+                    }}
+                    className="absolute w-full h-full object-contain drop-shadow-2xl rounded-lg"
+                    onError={(e) => {
+                      // fallback logic handling broken image paths elegantly
+                      e.target.style.display = 'none';
+                      e.target.parentElement.innerHTML += '<div class="text-secondary text-sm">Image not found</div>';
+                    }}
+                  />
+                </AnimatePresence>
               </div>
 
               {/* Next Button */}
-              <button
-                onClick={nextImage}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-[#0F1720] border border-[#23232A]
-                text-white rounded-full p-2 hover:scale-105 transition z-20"
-              >
-                ▶
-              </button>
+              {images.length > 1 && (
+                <button
+                  onClick={nextImage}
+                  className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-surface-base/80 backdrop-blur-md border border-white/10 text-white rounded-full hover:scale-110 hover:bg-white/10 transition z-20"
+                >
+                  <ChevronRight className="w-6 h-6 mr-[-2px]" />
+                </button>
+              )}
             </div>
 
-            {/* Dots */}
-            <div className="flex items-center justify-center mt-6 space-x-3">
-              {images.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setIndex(i)}
-                  className={`w-3 h-3 rounded-full transition-transform
-                    ${index === i ? 'bg-[#00A3FF] scale-110' : 'bg-gray-600'}`}
-                />
-              ))}
-            </div>
+            {/* Pagination Dots */}
+            {images.length > 1 && (
+              <div className="flex items-center justify-center mt-6 gap-3">
+                {images.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      setDirection(i > index ? 1 : -1);
+                      setIndex(i);
+                    }}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      index === i ? 'w-8 bg-accent-blue' : 'w-2 bg-white/20 hover:bg-white/40'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         ) : (
-          <div className="bg-[#13131A] border border-[#2A2A3A] rounded-xl p-8 shadow-lg flex flex-col items-center">
-            <div className="w-full max-w-3xl h-64 rounded-2xl bg-[#0F1720] border border-[#23232A] flex items-center justify-center">
-              <p className="text-gray-400">No screenshots available</p>
+          <div className="glass-card rounded-[32px] p-12 flex flex-col items-center justify-center min-h-[400px]">
+            <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4">
+              <ExternalLink className="w-8 h-8 text-secondary" />
             </div>
+            <p className="text-secondary font-medium">No screenshots available for this project.</p>
           </div>
         )}
 
-        {/* Footer Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-end">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-5 py-2 bg-[#00A3FF] text-white font-semibold rounded-full hover:bg-[#3DB4FF] transition"
-          >
-            View Source Code
-          </a>
-
-          <button
-            onClick={() => navigate('/')}
-            className="px-5 py-2 bg-[#13131A] border border-[#2A2A3A] text-white rounded-full hover:bg-[#17171b] transition"
-          >
-            Back to Home
-          </button>
-        </div>
-
       </div>
-    </div>
+    </motion.div>
   );
 };
 
